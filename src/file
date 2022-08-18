@@ -1,0 +1,341 @@
+//
+import { h, Component } from 'preact';
+import { Router } from 'preact-router';
+import { Match } from 'preact-router/src/match';
+
+import Header from './header';
+import VerticalNavigation from './verticalNavigation';
+import RightVerticalNavigation from './rightVerticalNavigation';
+import HorizontalNavigation from './horizontalNavigation';
+import Dashboard from '../routes/dashboard';
+import NotFound from '../routes/404';
+import Login from '../routes/login';
+import EmailChecks from '../routes/emailChecks';
+import VerificationLink from '../routes/verificationLink';
+import EnterPassword from '../routes/loginPassword';
+import VerifyEnterPassword from '../routes/verifyLoginPassword';
+import ForgotPassword from '../routes/forgotPassword';
+import ResetPassword from '../routes/resetPassword';
+import SetPassword from '../routes/setPassword';
+import BrowserNotSupported from '../routes/pages/browserNotSupport';
+// import NoInternet from '../routes/pages/noInternet';
+import SessionDestroyed from '../routes/pages/sessionDestroy';
+import Maintenance from '../routes/pages/maintenance';
+import DomainNotFound from '../routes/pages/domainNotFound';
+import ForcePasswordChange from '../routes/pages/forcePasswordChange';
+import SlowInternetSpeed from '../components/slowInternet';
+import CourseList from '../routes/courseList';
+import AllCourses from '../routes/allCourses';
+import Settings from '../routes/settings';
+import CreateNewCourse from '../routes/createNewCourse';
+import CreateCourseMap from '../routes/createCourseMap';
+import CreateCourseAddTopic from '../routes/createCourseAddTopic';
+import CreateCourseTopicContent from '../routes/createCourseTopicContent';
+import UserList from '../routes/userList';
+import UserDetails from '../routes/userDetails';
+import {Toast} from '../lib/toastr';
+import axios from 'axios';
+import NoInternet from '../components/noInternet';
+import NetworkInformationApiPolyfill from '../../node_modules/network-information-api-polyfill/src';
+import MyLearnings from '../routes/myLearnings';
+import AllMyLearnings from '../routes/allMyLearnings';
+import CourseLobby from '../routes/courseLobby';
+import TempTouchDrawer from '../routes/tempTouchDrawer';
+import CourseSettings from '../routes/courseSettings';
+import UserCourseMap from '../routes/userCourseMap';
+import LearnerContent from '../routes/learnerContent';
+
+import CONSTANTS from '../lib/constants';
+import EmailTemplate from '../routes/emailTemplate';
+
+
+
+export default class App extends Component {
+  /** Gets fired when the route changes.
+   *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
+   *	@param {string} event.url	The newly routed URL
+   */
+
+  componentDidMount() {
+    let that = this;
+    let connection = window.navigator.connection || window.navigator.mozConnection || window.navigator.webkitConnection;
+    let type;
+    if (connection) {
+      type = connection.effectiveType;
+      // console.log(type,'type');
+      // console.log(connection,'conection');
+      if (parseFloat(connection.downlink) <= 0.6) {
+        that.setState({isSlowInternetSpeed: true});
+        console.log("slow internet", this.state.isSlowInternetSpeed);
+        // console.log(that.state.isSlowInternetSpeed,'isSlowInternetSpeed =============');
+      } else {
+        that.setState({isSlowInternetSpeed: false});
+      }
+    } else {
+      new NetworkInformationApiPolyfill().then(async (connection) => {
+        console.log("conntttttttt", connection);
+        if (parseFloat(connection.downlink) <= 0.6){
+          console.log("slow ployfill");
+          await this.setState({slowInternet:true});
+        }
+        if (parseFloat(connection.downlink) > 0.6){
+          await this.setState({slowInternet:false});
+        }
+      });
+    }
+
+
+    function updateConnectionStatus() {
+      // console.log("Connection type changed from " + type + " to " + connection.effectiveType);
+      if (connection) {
+        type = connection.effectiveType;
+        if (parseFloat(connection.downlink) <= 0.6) {
+          that.setState({isSlowInternetSpeed: true});
+        } else {
+          that.setState({isSlowInternetSpeed: false});
+        }
+      } else {
+        new NetworkInformationApiPolyfill().then(async (connection) => {
+          console.log("conntttttttt", connection);
+          if (parseFloat(connection.downlink) <= 0.6){
+            await this.setState({slowInternet:true});
+            console.log("slowwwwwwww");
+          }
+          if (parseFloat(connection.downlink) > 0.6){
+            await this.setState({slowInternet:false});
+          }
+        });
+      }
+
+    }
+    if (connection) {
+      connection.addEventListener('change', updateConnectionStatus);
+    }
+    let isOnline = window.navigator.onLine;
+    if (isOnline) {
+      this.setState({isOffline:false});
+    } else {
+      this.setState({ isOffline: true });
+    }
+    window.addEventListener('offline', () => {
+      this.setState({ isOffline: true, isSlowInternetSpeed:false });
+      return;
+    });
+    window.addEventListener('online', () => {
+      this.setState({isOffline:false});
+      window.location.reload();
+    });
+    axios.put(`${CONSTANTS.API_URL}/api/v1/user/pageVisitUserInformation`,{});
+
+  }
+
+  beforeInstallPrompt() {
+    window.addEventListener("beforeinstallprompt", ev => {
+      // Stop Chrome from asking _now_
+      // ev.preventDefault();
+
+      // Create your custom "add to home screen" button here if needed.
+      // Keep in mind that this event may be called multiple times,
+      // so avoid creating multiple buttons!
+      ev.prompt();
+    });
+  }
+
+  componentWillMount() {
+    this.state = {
+      isOffline: false,
+      currentUrl: '',
+      isOuterDivNeeded: false,
+      isBrowserNotSupported: false,
+      isSlowInternetSpeed: false
+    };
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then((reg) => {
+          // console.log('service worker registered for scope: ' + reg.scope);
+        })
+        .catch((err) => {
+          console.error(err);
+          console.info('Service workers are not supported.');
+        });
+    }
+
+    // this.beforeInstallPrompt();
+    let browserResult = this.getBrowserVersion();
+    console.log("browserResult",browserResult);
+    // need to add userAgent value for MS Edge
+    if (browserResult === "Other") {
+      this.setState({isBrowserNotSupported:false});
+    } else if ((browserResult === "Edge") || (browserResult >= 9 && browserResult < 10) || (browserResult >= 11 && browserResult < 12)) {
+      this.setState({isBrowserNotSupported: true});
+    }
+  }
+
+  getBrowserVersion() {
+    let detectIEregexp, isEdge;
+    console.log("navigator.userAgent",navigator.userAgent);
+    if (navigator.userAgent.indexOf('MSIE') !== -1) {
+      detectIEregexp = /MSIE (\d+\.\d+);/; //test for MSIE x.x
+    }
+    else if (navigator.userAgent.indexOf('Edg') !== -1) {
+      console.log("edgeeeeee");
+      detectIEregexp = /Edg/;
+      isEdge = true;
+    }
+    else {
+      detectIEregexp = /Trident.*rv[ :]*(\d+\.\d+)/; //test for rv:x.x or rv x.x where Trident string exists
+    } // if no "MSIE" string in userAgent
+    console.log("detectIEregexp.test(navigator.userAgent)",detectIEregexp.test(navigator.userAgent));
+    if (detectIEregexp.test(navigator.userAgent)){ //if some form of IE
+      if (isEdge) {
+        return 'Edge';
+      }
+      let ieversion=new Number(RegExp.$1); // capture x.x portion and store as a number
+      if (ieversion>=11 && ieversion<12)
+        return (ieversion);
+      else if (ieversion>=9 && ieversion<10)
+        return (ieversion);
+
+    } else {
+      return ("Other");
+    }
+  }
+
+  handleRoute(e) {
+    this.setState({
+      currentUrl: e.url
+    });
+
+    // If any unauthenticated page is loaded, the outer-most-div class will not be added
+    if (this.state.currentUrl.includes('/emailChecks') || this.state.currentUrl.includes('/setPassword')
+    || this.state.currentUrl.includes('/resetPassword') || this.state.currentUrl.includes('/enterPassword')
+    || this.state.currentUrl.includes('/forgotPassword') || this.state.currentUrl.includes('/verificationLink')
+    || this.state.currentUrl.includes('/verifyEnterPassword')
+    || this.state.currentUrl === '/') {
+      return this.setState({isOuterDivNeeded: false});
+    }
+
+    this.setState({isOuterDivNeeded: true});
+  }
+
+  render() {
+    return (
+      <div style="height:100%;">
+        {
+          !this.state.isBrowserNotSupported  && (
+            <div id="app">
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
+              <link rel="manifest" href="/manifest.json" />
+              <link rel="stylesheet" href="/style/plyr.css" />
+              <script src="https://cdn.plyr.io/3.6.2/plyr.js" />
+              <script type="image/svg+xml" src="https://cdn.plyr.io/3.6.2/plyr.svg" />
+              <script src="https://www.webrtc-experiment.com/common.js" />
+              <script src="/assets/js/jquery-3.5.1.js" />
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.6.1/RecordRTC.js"/>
+              <script src="/assets/js/vanillaSelectBox.js" />
+              <script src="https://cdn.jsdelivr.net/gh/foobar404/wave.js/dist/bundle.iife.js" />
+              <Match path="/">
+                {
+                  ({path}) => {
+                    if (!/\/forgotPassword/.test(path) && path !== '/resetPassword' && path !== '/verify' && path !== '/setpasswords' && path !== '/notFound' && path !== '/' && path !== '/emailChecks' && path !== '/verificationLink' && path !== '/enterPassword' && path !== '/setPassword' && path !== '/verifyEnterPassword') {
+                      return (
+                        <div>
+                          <Header selectedRoute={this.state.currentUrl} />
+                          <VerticalNavigation path={path} />
+                          <RightVerticalNavigation path={path} />
+                          <HorizontalNavigation path={path} />
+                          {
+                            this.state.isOffline && (
+                              <NoInternet />
+                            )
+                          }
+                          {
+                            this.state.isSlowInternetSpeed && (
+                              <SlowInternetSpeed />
+                            )
+                          }
+                        </div>
+                      );
+                    }
+                    else if (path === '/settings') {
+                      return (
+                        <div>
+                          <VerticalNavigation path={path} />
+                          <RightVerticalNavigation path={path} />
+                        </div>
+                      );
+                    }
+                    return  (
+                      <div>
+                        {
+                          this.state.isOffline && (
+                            <NoInternet />
+                          )
+                        }
+                        {
+                          this.state.isSlowInternetSpeed && (
+                            <SlowInternetSpeed />
+                          )
+                        }
+                      </div>
+                    );
+
+                  }
+                }
+
+              </Match>
+              <div id="main-body" style="overflow-y:auto;" class={(this.state.isOuterDivNeeded ? 'outer-most-div thin-scrollbar' : 'thin-scrollbar')}>
+                <Router onChange={this.handleRoute.bind(this)}>
+                  <NotFound path='/notFound' type="404" />
+                  <Login path="/"/>
+                  <EmailChecks path="/emailChecks"/>
+                  <VerificationLink path="/verificationLink"/>
+                  <EnterPassword path="/enterPassword"/>
+                  <VerifyEnterPassword path="/verifyEnterPassword"/>
+                  <ForgotPassword path="/forgotPassword"/>
+                  <ResetPassword path="/resetPassword"/>
+                  <SetPassword path="/setPassword"/>
+                  <Dashboard path="/home" />
+                  <CourseList path="/courses" />
+                  <AllCourses path="/courses/all" />
+                  <Settings path="settings/:type?" />
+                  <CreateNewCourse path="/course/create" />
+                  <CreateCourseMap path="/course/create/map/:id/:mapID?" />
+                  <CreateCourseAddTopic path="/course/:id/addTopic" />
+                  <CreateCourseTopicContent path ="/course/:id/topic/:topicID/content" />
+                  <UserList path="/users" />
+                  <UserDetails path="/user/:userID" />
+                  <SessionDestroyed path="/sessionDestroy" />
+                  <Maintenance path="/maintenance" />
+                  <DomainNotFound path="/domainNotFound" />
+                  <ForcePasswordChange path="/forcePasswordChange" />
+                  <EmailTemplate path="/emailTemplate/:uuid?" />
+                  <MyLearnings path="/myLearnings" />
+                  <AllMyLearnings path="/myLearnings/all" />
+                  <CourseLobby path="/course/:courseID/lobby" />
+                  <UserCourseMap path="/course/:courseID/user/themeMap" />
+                  <LearnerContent path="/course/:courseID/user/:themeMapID/content" />
+                  <TempTouchDrawer path="/tempTouchDrawer" />
+                  {/*
+                    Issue : Clicking Course Settings that brand color should be set on the course in the navigation panel
+                    By : Pallavi
+                    On : 3/2/2021
+                  */}
+                  <CourseSettings path="/course/:courseID/:from/:topicID/courseSettings" />
+                </Router>
+              </div>
+            </div>
+          )
+        }
+        {
+          this.state.isBrowserNotSupported && (
+            <div>
+              <BrowserNotSupported path="/browserNotSupported" />
+            </div>
+          )
+        }
+      </div>
+    );
+  }
+}
