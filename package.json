@@ -1,0 +1,53 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "3.0.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "flatpickr": "^4.6.9",
+    "google-tts-api": "^2.0.2",
+    "html2canvas": "^1.0.0-rc.7",
+    "jspdf": "^2.3.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "query-string": "^6.11.0",
+    "react": "^17.0.1",
+    "react-big-calendar": "^0.33.3",
+    "react-dom": "^17.0.1",
+    "react-player": "^2.9.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "4.0.2",
+    "sass": "^1.35.1",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
