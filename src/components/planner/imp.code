@@ -1,0 +1,155 @@
+        <div id="set-exercise" className="content-add-section" style={{display:"none"}}>
+                <div className="exerise-header-bar">
+                    <div style={{display:"flex", alignSelf:"center"}} onClick={CloseExerciseBox}>
+                        <div className="exercise-header-text" style={{marginRight:"6%", alignSelf:"center", whiteSpace:"nowrap"}}>Day{selecteddaynumber} - Exercise {row+1}</div>
+                        <span onClick={AddExercise} role="button" class="material-icons-outlined" style={{fontSize:"1.8vw", alignSelf:"center", color:"#e0e0e0"}}>add_circle_outline</span>
+                    </div>
+                    <img onClick={CloseExerciseBox} src={Cross} className="exercise-header-close"/>
+                </div>
+                <div className="exercise-body-container">
+                    <div>
+                        <div onClick={selectExercise} id="select-Exercise" type="text" className="select-exercise-block">
+                            <div className="select-exercise-text">Select Exercise</div>
+                            <img id="Select-Exercise" src={ArrowDown} className="select-exercise-icon"/>
+                        </div>
+                        <div id="Exercise-list" className="select-exercise-list" style={{display:"none"}}>
+                            {
+                                MainExercise.map((data,index)=>{
+                                    return (
+                                        <div  role="button" onClick={handleExercise('content',1,data)} onLoad={findandSetExercise(data)}  className="exercise-list-container">
+                                           <div className="exercise-list">
+                                              {index+1}. {data.exName}
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+                        <div id="weightkg" onClick={weight("weight[KG]")} className="select-unit-container">
+                            <div className="row" style={{padding: "0 5% 0 5%"}}>
+                                <div className="select-unit-header" >
+                                    <div className="select-unit-text">Unit - Weight[KG]</div>
+                                    <input onChange={handleExercise('unit',0)} value="weight[KG]" checked={unit=="weight[KG]"?true:false} id="weight-radio-weight[KG]" name="unit" type="radio"/>
+                                    {/* <img src={ArrowDown} className="select-unit-dropdown"/> */}
+                                </div> 
+                                <div id="weight-unit1-weight[KG]" className="select-unit-header" style={{padding: "3% 2% 0 0"}}>
+                                    <div className="select-unit-body">
+                                        <div className="select-unit-name">
+                                            <div className="select-unit-name-text">Set</div>
+                                        </div>
+                                        <input onChange={handleExercise('set',0)}  value={unit=="weight[KG]"?set:0} type="text" className="select-unit-text-container"/>
+                                    </div>
+
+                                    <div className="select-unit-body">
+                                        <div className="select-unit-name">
+                                            <div className="select-unit-name-text">Rep</div>
+                                        </div>
+                                        <input onChange={handleExercise('rep',0)}  value={unit=="weight[KG]"?rep:0} type="text" className="select-unit-text-container"/>
+                                    </div>     
+                                </div>
+                                <div id="weight-unit2-weight[KG]" className="select-unit-header" style={{padding: "3% 2% 0 0"}}>
+                                    <div className="select-unit-body">
+                                            <div className="select-unit-name">
+                                                <div className="select-unit-name-text">KG</div>
+                                            </div>
+                                            <input onChange={handleExercise("defaultvalue",0)} value={unit=="weight[KG]"?defaultvalue:""} type="text" className="select-unit-text-container"/>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+
+
+                        <div id="weightlbs" onClick={weight("weight[LBS]")} className="select-unit-container">
+                            <div className="row" style={{padding: "0 5% 0 5%"}}>
+                                <div className="select-unit-header" >
+                                    <div className="select-unit-text">Unit - Weight[LBS]</div>
+                                    <input onChange={handleExercise('unit',0)} value="weight[LBS]" checked={unit=="weight[LBS]"?true:false} id="weight-radio-weight[LBS]"  name="unit" type="radio"/>
+                                    {/* <img src={ArrowDown} className="select-unit-dropdown"/> */}
+                                </div> 
+                                <div id="weight-unit1-weight[LBS]" className="select-unit-header" style={{padding: "3% 2% 0 0"}}>
+                                    <div className="select-unit-body">
+                                        <div className="select-unit-name">
+                                            <div className="select-unit-name-text">Set</div>
+                                        </div>
+                                        <input onChange={handleExercise('set',0)} value={unit=="weight[LBS]"?set:0} type="text" className="select-unit-text-container"/>
+                                    </div>
+
+                                    <div className="select-unit-body">
+                                        <div className="select-unit-name">
+                                            <div className="select-unit-name-text">Rep</div>
+                                        </div>
+                                        <input onChange={handleExercise('rep',0)} value={unit=="weight[LBS]"?rep:0} type="text" className="select-unit-text-container"/>
+                                    </div>     
+                                </div>
+                                <div id="weight-unit2-weight[LBS]" className="select-unit-header" style={{padding: "3% 2% 0 0"}}>
+                                    <div className="select-unit-body">
+                                            <div className="select-unit-name">
+                                                <div className="select-unit-name-text">KG</div>
+                                            </div>
+                                            <input onChange={handleExercise("defaultvalue",0)} value={unit=="weight[LBS]"?defaultvalue:""} type="text" className="select-unit-text-container"/>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div id="Time" onClick={time} className="select-unit-container">
+                            <div className="row" style={{padding: "0 5% 0 5%"}}>
+                                <div className="select-unit-header">
+                                    <div className="select-unit-text">Unit - Duration</div>
+                                    <input onChange={handleExercise('unit',0)} value="duration" checked={unit=="duration"?true:false} id="time-radio" name="unit" type="radio"/>
+                                    {/* <img src={ArrowDown} className="select-unit-dropdown"/> */}
+                                </div>
+                                
+                                <div id="time-unit" className="select-unit-header" style={{padding: "3% 2% 0 0", display:"none"}}>
+                                    <div className="select-unit-body">
+                                        <div className="select-unit-name">
+                                            <div className="select-unit-name-text">Min</div>
+                                        </div>
+                                        <input onChange={handleExercise("defaultvalue",0)} value={unit=="duration"?defaultvalue:""}  type="text" className="select-unit-text-container"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="Number" onClick={number} className="select-unit-container">
+                            <div className="row" style={{padding: "0 5% 0 5%"}}>
+                                <div className="select-unit-header">
+                                    <div className="select-unit-text">Unit - Number</div>
+                                    <input onChange={handleExercise('unit',0)} value="number" checked={unit=="number"?true:false} id="number-radio" name="unit" type="radio"/>
+                                    {/* <img src={ArrowDown} className="select-unit-dropdown"/> */}
+                                </div>
+                                
+                                <div id="number-unit" className="select-unit-header" style={{padding: "3% 2% 0 0", display:"none"}}>
+                                    <div className="select-unit-body">
+                                        
+                                        <input onChange={handleExercise("defaultvalue",0)} value={unit=="number"?defaultvalue:""}  type="text" className="select-unit-text-container"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="Distance" onClick={distance} className="select-unit-container">
+                            <div className="row" style={{padding: "0 5% 0 5%"}}>
+                                <div className="select-unit-header">
+                                    <div className="select-unit-text">Unit - Distance</div>
+                                    <input onClick={handleExercise('unit',0)} value="distance" checked={unit=="distance"?true:false} id="distance-radio" name="unit" type="radio"/>
+                                    {/* <img src={ArrowDown} className="select-unit-dropdown"/> */}
+                                </div>
+                                
+                                <div id="distance-unit" className="select-unit-header" style={{padding: "3% 2% 0 0", display:"none"}}>
+                                    <div className="select-unit-body">
+                                        <div className="select-unit-name">
+                                            <div className="select-unit-name-text">Km</div>
+                                        </div>
+                                        <input onChange={handleExercise("defaultvalue",0)} value={unit=="distance"?defaultvalue:""}  type="text" className="select-unit-text-container"/>
+                                    </div>     
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+             </div>
