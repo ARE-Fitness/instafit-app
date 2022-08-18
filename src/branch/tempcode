@@ -1,0 +1,73 @@
+  {/* <div onClick={SelectGym}  className="row mr-5 mt-3" style={{background:"#CAD5E2", borderRadius:20,height:40}}>                     
+                     <div className="shadow m-2" style={{ borderRadius: 100, width: 25, height: 25}} >
+                       <img  className="d-block w-100 h-100 img-fluid"  src={gymId!=""?`${API}/photo-gym/${gymId}`:"https://img.icons8.com/doodle/48/000000/empty-box.png"}/>  
+                     </div>
+                     <p  className="mr-2 mt-2 mb-2" style={{fontSize: 15}}>{gymId!=""?gymName.substring(0,5)+"...":"Select Gym"}</p>
+                     <p className="mr-2 mt-2 mb-2" style={{color:'black',fontSize:15,fontFamily:'cursive',marginTop:20,fontWeight:'bolder'}}>( {branchtotal} ) <sup style={{fontSize:8}}>{mapAction==0?"Active":"Inactive"} Branch's</sup></p>
+            </div> * */}
+
+
+
+
+            {/* <div className="row" style={{justifyContent: "space-between"}}>
+                <div className="row">
+                    <input className="ml-5 pl-4 pr-4 pb-2 pt-2 mb-3 mt-3 shadow-sm" placeholder="Search for names.." style={{outline: "none", borderRadius: 30, width: "60%", border: "none", color: "#757575", backgroundColor: "#e0e0e0"}}/>
+                    <span onClick={handleOpenFilterDialog} className="material-icons mt-3 ml-1" style={{fontSize: 32}}>sort</span>
+                    <Menu id="simple-menu" anchorEl={openFilterDialog} keepMounted open={Boolean(openFilterDialog)}>
+                      <div style={{width: "100%", height: 30}} onClick={handleActiveBranch}>
+                          <MenuItem style={{color: "#616161"}}>Active</MenuItem>
+                      </div>
+                      <div style={{width: "100%", height: 30}} onClick={handleInActiveBranch}>
+                          <MenuItem style={{color: "#616161"}}>Inactive</MenuItem>
+                      </div>
+                    </Menu>                    
+                    <span className="material-icons mt-3 ml-1" onClick={openAddBranchForm} style={{fontSize: 32}}>add_circle</span>
+         
+                </div>
+                  
+                <div onClick={SelectGym}  className="row mr-5 mt-3" style={{background:"#CAD5E2", borderRadius:20,height:40}}>                     
+                     <div className="shadow m-2" style={{ borderRadius: 100, width: 25, height: 25}} >
+                       <img  className="d-block w-100 h-100 img-fluid"  src={gymId!=""?`${API}/photo-gym/${gymId}`:"https://img.icons8.com/doodle/48/000000/empty-box.png"}/>  
+                     </div>
+                     <p  className="mr-2 mt-2 mb-2" style={{fontSize: 15}}>{gymId!=""?gymName.substring(0,5)+"...":"Select Gym"}</p>
+                     <p className="mr-2 mt-2 mb-2" style={{color:'black',fontSize:15,fontFamily:'cursive',marginTop:20,fontWeight:'bolder'}}>( {branchtotal} ) <sup style={{fontSize:8}}>{mapAction==0?"Active":"Inactive"} Branch's</sup></p>
+                 </div>
+            </div>
+      */}
+
+
+                {/* <div className="pt-3 pl-3 pr-3">
+                {
+                  Branchs.map((branch,index)=>{
+                    return(
+                      <div>
+                        
+                      <div onClick={onBranchSelect(branch)}  key={branch._id} style={{display:"flex"}}>
+                          <div className="body-content"  style={{backgroundColor:branchId == branch._id?"#f5f5f5":"#ffffff" }}>
+                              <div className="body-content-one">
+                                  <div >
+                                      <div style={{width:"15vw"}} className="profile-name">{branch.branchName}</div>
+                                      <div  style={{width:"15vw",fontSize:'0.8vw',marginBottom:"-2%"}} className="mt-2 profile-email">City</div>
+                                      <div  style={{width:"15vw",fontWeight:600}} className="profile-email">{branch.address}</div>
+                                      <div  style={{width:"15vw",marginBottom:"-2%",fontSize:'0.8vw',marginTop:'2%'}} className="profile-email">Location</div>
+                                      <div  style={{width:"15vw",fontWeight:600}} className="profile-email">{branch.location}</div>
+                                  </div>
+                              </div>
+                              <div className="body-content-two">
+                                  <div role="button" onClick={handleBranchUpdate(branch)} style={{height:'50%'}} className="body-content-two-action-container">
+                                      <img src={UpdateIcon} className="body-content-two-action-icon"/>
+                                  </div>
+                                  <div onClick={handleConfirmOpen(branch.branchName,branch._id)} role="button" style={{height:'50%'}}  className="body-content-two-action-container">
+                                     
+                                     <img src={BlockIcon} className="body-content-two-action-icon" />
+                                            
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                    )
+                  })
+                }
+                </div> */}
+
