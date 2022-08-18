@@ -1,1 +1,395 @@
 
+.btn,
+.jumbotron,
+.nav :hover {
+  border-radius: 0px;
+}
+
+body {
+  background: #e2edee;
+  font-family: 'Arial';
+  overflow-x: hidden;
+}
+
+
+.bg {
+  background: url("./assets/loginbg.png");
+  animation: breath 20s linear;
+  animation-duration: 20s;
+  animation-iteration-count: 1;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes breath {
+  0% { background-size: 100% auto; }
+  50% { background-size: 115% auto; }
+  100% { background-size: 100% auto; }
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 70px;
+  background-color: #ffffff;
+  position: fixed;
+  margin-left: 13px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+
+.sidebar a.active {
+  background-color: #ffffff;
+  color: rgb(255, 81, 0);
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+
+label.wrap {
+  width:200px;
+  overflow: hidden;
+  height: 50px;
+  position: relative;
+  display: block;
+  border:2px solid blue;
+}
+
+select.dropdown{
+  height: 50px;
+  padding: 10px;
+  border: 0;
+  font-size: 15px;
+  width: 200px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+label.wrap:after {
+  content:"\f13a ";
+  font-family: FontAwesome;
+  color: #000;
+  position: absolute;
+  right: 0;
+  top: 18px;
+  z-index: 1;
+  width: 10%;
+  height: 100%;
+  pointer-events: none;
+}
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+      display:none;
+  }
+  .hideonmobile{display:none;}
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding-left: 32px;
+  padding-top: 10px;
+}
+
+.grid-app {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding-top: 10px;
+}
+
+#answer,
+#show,
+#hide:target {
+    display: none; 
+}
+
+#hide:target + #show,
+#hide:target ~ #answer {
+    display: inherit; 
+}
+
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+-ms-overflow-style: none;  
+scrollbar-width: none; 
+}
+
+
+.loader{
+  background-image: url("./assets/Spinner.svg");
+  background-size: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 960px) {
+  .hidedesktop{display:none;}
+  .wrapper{width: 92vw;}
+}
+
+@media only screen and (min-width: 768px) {
+  .hidedesktop{display:none;}
+}
+
+@media only screen and (min-width: 540px) {
+  .hidedesktop{display:none;}
+}
+
+@media(max-width: 520px) {
+  .hideonmobile{display:none;}
+}
+
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #ff5722;
+}
+
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.table-header{
+  font-size: 14px;
+  color:rgb(34, 34, 41);
+  font-weight: bold;
+}
+
+.table-row-number{
+  font-size: 12px;
+  font-weight: 900;
+  color: rgb(34, 34, 41);
+}
+
+.borderless td, .borderless th {
+  border: none;
+}
+
+
+.dropdowndisplaypoupview {
+  display: none;
+  position: absolute;
+  background-color:white;
+  min-width: 200px;
+  color: #000;
+  border: 1px dashed rgb(209, 209, 209);
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdowncontent {
+  display: none;
+  position: absolute;
+  background-color:white;
+  min-width: 160px;
+  max-height: 180px;
+  bottom: 42px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdowncontent a {
+  color: black;
+  padding: 12px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdowncontent a:hover{
+  background-color: whitesmoke;
+}
+
+::placeholder {
+  color: rgb(51, 48, 48);
+  opacity: 1; 
+}
+
+:-ms-input-placeholder { 
+ color: rgb(51, 48, 48);
+}
+
+::-ms-input-placeholder { 
+ color: rgb(51, 48, 48);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+
+  -webkit-appearance: none; 
+   height: 10px;
+   width: 10px;
+   background: rgb(14, 14, 14);
+
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+  display: flex;
+}
+
+
+
+::-webkit-scrollbar {
+	width: 5px;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px rgb(174, 212, 214); 
+	border-radius: 30px;
+	overflow-x: hidden;
+}
+
+
+::-webkit-scrollbar-thumb {
+	background: rgb(129, 129, 129); 
+	border-radius: 30px;
+	overflow-x: hidden;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+	background: #ff8945; 
+	overflow-x: hidden;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	cursor: pointer;
+}
+
+
+
+.inpputenter{
+  font-size: 16px; height: 30px; width: 150px; padding-inline: 5px; border-radius: 5px; border: 1px solid black; outline: none; margin: 5px;
+}
+.btnadd{
+  height: 30px;
+  width: 100px;
+  background-color: #ff5722;
+  color: blanchedalmond;
+  cursor: grabbing;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+}
+
+.inputmembertestfield{
+  height: 30px;
+  width: 150px;
+  outline: none;
+  border: 1px dashed black;
+  font-size: 16px;
+} 
+
+/*selection class*/
+
+.element-selection-disable{
+   user-select: none;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   -webkit-touch-callout: none;
+}
+
+
+
