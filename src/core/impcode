@@ -1,0 +1,297 @@
+   //gym side bar
+   
+   {/*  <div onLoad={getThisGym(itemId)} className="body-info">
+                        
+                        <span onClick={handleOpenMoreItem} className="material-icons more-container">more_vert</span>
+                        <div className="more-items-container">
+                            <Link to={`/${itemId}/exercise-type`} style={{textDecoration: "none"}}>
+                                <div className="items-list">
+                                
+                                        <div className="item-icon-container">
+                                            <span class="material-icons-outlined item-icon">fitness_center</span>
+                                        </div>
+                                
+                                    <div className="item-text">Exercise Type</div>
+                                </div>
+                            </Link>
+                            <Link to={`/${itemId}/exercise-level`} style={{textDecoration: "none"}}>
+                                <div className="items-list">
+                                    
+                                        <div className="item-icon-container">
+                                            <span class="material-icons-outlined item-icon">poll</span>
+                                        </div>
+                                
+                                    <div className="item-text">Exercise Level</div>
+                                </div>
+                            </Link>
+                            <Link to={`/${itemId}/target-muscle`} style={{textDecoration: "none"}}>
+                                <div className="items-list">
+                                    <div className="item-icon-container">
+                                        <span class="material-icons-outlined item-icon">accessibility</span>
+                                    </div>
+                                    <div className="item-text">Target Muscle</div>
+                                </div>
+                            </Link>
+                            <Link to={{pathname:`/${itemId}/test-list`,query:{dashboardrole:0}}} style={{textDecoration: "none"}}>
+                                <div className="items-list">
+                                    <div className="item-icon-container">
+                                        <span class="material-icons-outlined item-icon">flag</span>
+                                    </div>
+                                    <div className="item-text">Test List</div>
+                                </div>
+                            </Link>
+                        </div>
+                 
+                        <center className="pt-2">
+                            {GymImg(itemId)}
+                            <p className="mt-3" style={{fontSize: 25}}>{data.gymName}</p>
+                            <div className="mt-2 shadow-sm" style={{borderRadius: 12, backgroundColor: "#e0e0e0", width: "80%", height: 62}}>
+                                <center>
+                                    <p className="pt-2">{data.ownerFirstname} {data.ownerLastname}
+                                    <p>{data.email}</p></p>
+                                </center>
+                            </div>
+                             
+                            <Grid container className="pt-3 pb-1" style={{paddingLeft: "5%", paddingRight :"5%"}}>
+                                <Grid xs={12} sm={12} md={6}>
+                                    <Link to="/admin/branch" style={{textDecoration: "none"}}>
+                                    <div className="mt-2 shadow-sm pt-2 pb-2" style={{borderRadius: 15, backgroundColor: "#e0e0e0", width: "80%", color: "#000000"}}>
+                                        <p className="pt-2">Branch</p>
+                                        <p style={{fontSize:35}}>{data?data.totalBranch:"20"}</p>
+                                    </div>
+                                    </Link>
+                                </Grid>
+                                <Grid xs={12} sm={12} md={6}>
+                                    <div className="mt-2 shadow-sm pt-2 pb-2" style={{borderRadius: 15, backgroundColor: "#e0e0e0", width: "80%"}}>
+                                        <p className="pt-2">Member</p>
+                                        <p style={{fontSize:35}}>{data?data.totalMembers:"123"}</p>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                            <Link to={{
+                                pathname:`/${itemId}/contents`,
+                                state:"contents"
+                            }} style={{textDecoration: "none"}}>
+                                <button disabled={data.state=="contents"?true:false} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-4 shadow" style={{ outline :"none" ,width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color:data.state=="contents"?"grey":"rgb(255, 81, 0)"}}>
+                                    Contents
+                                </button>
+                            </Link>
+                            <button disabled className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: "rgb(255, 81, 0)"}}>
+                                Gym Analytics
+                            </button>
+                            <button disabled className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: "rgb(255, 81, 0)"}}>
+                                Billing
+                            </button>
+                            
+                        </center>
+                    </div> */}
+
+//branch side panel
+
+                    {/*
+                     <div className="body-info">
+                        <span  className="material-icons mt-4 mr-2 btn" style={{float: "right", fontSize: 30}}>more_vert</span>
+                        <div className="more-items-container">
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">fitness_center</span>
+                                </div>
+                                <div className="item-text">Exercise Type</div>
+                            </div>
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">poll</span>
+                                </div>
+                                <div className="item-text">Exercise Level</div>
+                            </div>
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">accessibility</span>
+                                </div>
+                                <div className="item-text">Target Muscle</div>
+                            </div>
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">flag</span>
+                                </div>
+                                <div className="item-text">Test List</div>
+                            </div>
+                        </div>
+                        
+                        
+                        <center className="pt-2">
+                            {GymImg(data.gymId)}
+                            <p className="mt-3" style={{fontSize: 25}}>{data.branchName} <sup>(<strong style={{color:data.active?'green':'red',fontSize:10}}> {data.active?"Active":"Inactive"}</strong>)</sup></p>
+                            <div className="mt-2 shadow-sm" style={{borderRadius: 12, backgroundColor: "#e0e0e0", width: "60%", height: 62}}>
+                                <center>
+                                    <p className="pt-2">{data.gymName}
+                                    <p>{data.email}</p></p> 
+                                </center>
+                            </div>
+                            <Grid container className="pt-3 pb-1" style={{paddingLeft: "5%", paddingRight :"5%"}}>
+                                 <Grid xs={12} sm={12} md={6}>
+                                    <div onClick={()=>{
+                                        if(itemId!=""){
+                                            history.push(`/${data.branchId}/admin`)
+                                        }
+                                    }} className="mt-2 shadow-sm pt-2 pb-2" style={{borderRadius: 15, backgroundColor: "#e0e0e0", width: "80%"}}>
+                                        <p className="pt-2">Admin User</p>
+                                        <p style={{fontSize:35}}>{data.totaladminusers}</p>
+                                    </div>
+                                </Grid>
+                                <Grid xs={12} sm={12} md={6}>
+                                    <div className="mt-2 shadow-sm pt-2 pb-2" onClick={()=>{
+                                        if(itemId!=""){
+                                            history.push(`/members/${data.branchId}`)
+                                        }
+                                    }} style={{borderRadius: 15, backgroundColor: "#e0e0e0", width: "80%"}}>
+                                        <p className="pt-2">Member</p>
+                                        <p style={{fontSize:35}}>{data.totalmembers}</p>
+                                    </div>
+                                </Grid>
+                            </Grid>
+        
+                            <button onClick={()=>{
+                                history.push({
+                                    pathname:`/${data.gymId}/contents`,
+                                    state:"contents"
+                                });
+                            }}  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-4 shadow" style={{ outline :"none" ,width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: "rgb(255, 81, 0)"}}>
+                                Contents
+                            </button>
+                            <button onClick={()=>{
+                                 history.push({
+                                    pathname:`/${data.branchId}/planner`,
+                                    state:"planner"
+                                })
+                            }} disabled={data.state=="planner"?true:false} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: data.state=="planner"?"grey":"rgb(255, 81, 0)"}}>
+                                Planner
+                            </button>
+                            <button disabled className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: "rgb(255, 81, 0)"}}>
+                                Branch Analytics
+                            </button>
+                            <button disabled className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: "rgb(255, 81, 0)"}}>
+                                Billing
+                            </button>
+                        </center>
+                    </div> 
+                    */}
+
+
+
+//member sidebar
+{/*
+   <div className="body-info">
+                        <span  onClick={handleClick} className="material-icons mt-4 mr-2 btn" style={{float: "right", fontSize: 30}}>more_vert</span>
+                        <div className="more-items-container">
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">fitness_center</span>
+                                </div>
+                                <div className="item-text">Exercise Type</div>
+                            </div>
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">poll</span>
+                                </div>
+                                <div className="item-text">Exercise Level</div>
+                            </div>
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">accessibility</span>
+                                </div>
+                                <div className="item-text">Target Muscle</div>
+                            </div>
+                            <div className="items-list">
+                                <div className="item-icon-container">
+                                    <span class="material-icons-outlined item-icon">flag</span>
+                                </div>
+                                <div className="item-text">Test List</div>
+                            </div>
+                        </div>
+                        
+                        
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={openDialog}
+                            keepMounted
+                            open={Boolean(openDialog)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem style={{color: "#616161"}} onClick={handleClose}>Member Bio</MenuItem>
+                        </Menu>
+                        <center className="pt-2">
+                            {MemberImg(data.memberId)}
+                            <p className="mt-3" style={{fontSize: 25}}>{data.mfname} {data.mlname}</p>
+                            <div className="mt-2 shadow-sm" style={{borderRadius: 12, backgroundColor: "#e0e0e0", width: "60%", height: 62}}>
+                                <center>
+                                    <p className="pt-2">{data.memail}
+                                    <p>{data.mphone}</p></p> 
+                                </center>
+                            </div>
+                            <Grid container className="pt-3 pb-1" style={{paddingLeft: "5%", paddingRight :"5%"}}>
+                                 <Grid xs={12} sm={12} md={12}>
+                                     <div className="mt-2 shadow-sm pt-2 pb-2" style={{borderRadius: 5, backgroundColor: "#CAD5E2", width: "80%"}}>
+                                       <div className="col">
+                                           <div className="row mr-2 ml-2 mt-2">
+                                             <span class="material-icons" style={{color:'#E03B8B'}}>
+                                              event_note
+                                             </span>
+                                             <p style={{fontSize:14,marginLeft:4,fontWeight:'bold'}}>{planner_name==""?"planner name":planner_name}</p>
+                                             <p onClick={()=>{
+                                              if(planner_name==""){
+                                                  alert(`please assign a planner there is no planner`)
+                                              }else{
+                                                let open=window.confirm(`are you sure you want to open ${planner_name}`);
+                                                if(open){
+                                                    history.push(`/${data.branchId}/${plannerId}/manage-planner`);
+                                                }
+                                              }
+                                            }} style={{marginLeft:4}}>(<u style={{color:'blue'}}>view</u>)</p>
+                                          </div>
+                                          <div className="row ml-2 mr-2">
+                                             <button style={{margin:2,background:"rgb(255, 81, 0)",color:"#fff",outline:'none',border:'none',borderRadius:10,width:80,height:30}} onClick={()=>{
+                                                 history.push(`/member/calender/${data.memberId}`);
+                                             }}>Calendar</button>
+                                             <button style={{margin:2,background:"rgb(255, 81, 0)",color:"#fff",outline:'none',border:'none',borderRadius:10,width:80,height:30}} onClick={handleOpenDialogForm(0)}>Assign</button>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </Grid>
+                            </Grid>
+        
+                            <button onClick={()=>{
+                                history.push({
+                                    pathname:`/${data.branchId}/planner`,
+                                    state:"planner"
+                                })
+                            }} disabled={data.state=="planner"?true:false} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-4 shadow" style={{ outline :"none" ,width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: data.state=="planner"?'grey':"rgb(255, 81, 0)"}}>
+                              Planner
+                            </button>
+                            <button onClick={()=>{
+                                 history.push({
+                                     pathname:`/member/tests/${data.gymId}/${data.branchId}/${data.memberId}`,
+                                     state:'test'
+                                 })
+                            }} disabled={data.state=="test"?true:false}  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: data.state=="test"?"grey":"rgb(255, 81, 0)"}}>
+                             Test
+                            </button>
+                            <button onClick={()=>{
+                                history.push({
+                                    pathname:`/workout/reports/${data.branchId}/${data.memberId}`,
+                                    state:'workoutreport'
+                                })
+                            }} disabled={data.state=="workoutreport"?true:false}  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: data.state=="workoutreport"?"grey":"rgb(255, 81, 0)"}}>
+                              Workout Reports
+                            </button>
+                            {/* <button onClick={()=>{
+                                history.push({
+                                    pathname:`/planner/historys/${data.branchId}/${data.memberId}`,
+                                    state:'plannerhistory'
+                                })
+                                }} disabled={data.state=="plannerhistory"?true:false} className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mt-3 shadow" style={{outline :"none", width: "80%", borderRadius: 20, backgroundColor: "#ffffff", color: data.state=="plannerhistory"?"grey":"rgb(255, 81, 0)"}}>
+                              Planner History     
+                            </button> */}
+                        </center>
+                    </div> 
+*/}
